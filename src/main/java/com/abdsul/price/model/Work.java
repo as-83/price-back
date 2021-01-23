@@ -27,7 +27,7 @@ public class Work {
 
     private String unit;
 
-    private String coast;
+    private Integer coast;
 
     private LocalDate creationDate;
 }

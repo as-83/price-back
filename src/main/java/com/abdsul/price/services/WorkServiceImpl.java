@@ -28,7 +28,8 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    public void delete(Work work) {
-        workRepo.delete(work);
+    public boolean delete(Work work) {
+         workRepo.delete(work);
+         return true;
     }
 }

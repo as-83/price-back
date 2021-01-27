@@ -1,8 +1,10 @@
 package com.abdsul.price.controllers;
 
 import com.abdsul.price.model.Category;
+import com.abdsul.price.model.SubCategory;
 import com.abdsul.price.model.Work;
 import com.abdsul.price.services.CategoryService;
+import com.abdsul.price.services.SubCategoryService;
 import com.abdsul.price.services.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,9 @@ public class MainController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private SubCategoryService subCategoryService;
+
     @GetMapping("/works")
     public ResponseEntity<List<Work>> getWorks(){
         List<Work> works = workService.findAll();
@@ -35,15 +40,21 @@ public class MainController {
     }
 
     @DeleteMapping("/works/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id){
+    public ResponseEntity<Boolean> delete(@PathVariable Long id){
         Work work = workService.findWorkById(id);
-        workService.delete(work);
-        return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
+        boolean deleted = workService.delete(work);
+        return new ResponseEntity<>(deleted, HttpStatus.OK);
     }
 
     @GetMapping("/categories")
     public ResponseEntity<List<Category>> getCategories(){
         List<Category> categories = categoryService.findAll();
         return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+
+    @GetMapping("/subCategories")
+    public ResponseEntity<List<SubCategory>> getSubCategories(){
+        List<SubCategory> subCategories = subCategoryService.findAll();
+        return new ResponseEntity<>(subCategories, HttpStatus.OK);
     }
 }

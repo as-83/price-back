@@ -11,5 +11,5 @@ public interface WorkService {
 
     Work findWorkById(Long id);
 
-    void delete(Work work);
+    boolean delete(Work work);
 }
